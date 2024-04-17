@@ -1,0 +1,83 @@
+Nombre proyecto: quimicApp
+
+pensar en como poder acceder a la base desde el movil xk lo estoy haciendo en local host en el pc, si creo la apk, no va a poder hacer las peticiones
+al end poind xk no va a star en el movil ejecutandose.....xD? hacerme un clon de la base en el firebase? consultar a Rocio. si tengo que generar
+apk y van a testearla en el movil.
+
+create table if not exists ElementosQuimicos
+(
+    id                 int auto_increment
+        primary key,
+    nombre             varchar(255) null,
+    numeroAtomico      int          null,
+    simbolo            varchar(5)   null,
+    pesoAtomico        decimal(4)   null,
+    geometriaMasComun  varchar(255) null,
+    densidad           decimal(4)   null,
+    puntoFusion        decimal(4)   null,
+    puntoEbullicion    decimal(4)   null,
+    calorEspecifico    decimal(4)   null,
+    electronegatividad decimal(4)   null,
+    radioAtomico       decimal(4)   null,
+    radioCovalente     decimal(4)   null,
+    radioIonico        decimal(4)   null,
+    familia            varchar(255) null
+);
+
+create table if not exists preguntas
+(
+    id       int          not null
+        primary key,
+    pregunta varchar(255) not null,
+    tematica varchar(255) not null
+);
+
+create table if not exists respuestas
+(
+    id          int auto_increment
+        primary key,
+    respuesta   varchar(255) null,
+    es_correcta tinyint(1)   null,
+    id_pregunta int          null,
+    constraint respuestas_ibfk_1
+        foreign key (id_pregunta) references preguntas (id)
+);
+
+create index id_pregunta
+    on respuestas (id_pregunta);
+
+create table if not exists usuarios
+(
+    id       int auto_increment
+        primary key,
+    nombre   varchar(50)  null,
+    apellido varchar(50)  null,
+    correo   varchar(100) null,
+    password varchar(100) null
+);
+
+create table if not exists valencias
+(
+    id    int auto_increment
+        primary key,
+    valor int not null,
+    check ((`valor` >= -(4)) and (`valor` <= 7))
+);
+
+create table if not exists Elementos_Valencias
+(
+    id_elemento int null,
+    id_valencia int null,
+    id          int not null,
+    constraint Elementos_Valencias_ibfk_1
+        foreign key (id_elemento) references ElementosQuimicos (id),
+    constraint Elementos_Valencias_ibfk_2
+        foreign key (id_valencia) references valencias (id)
+);
+
+create index id_elemento
+    on Elementos_Valencias (id_elemento);
+
+create index id_valencia
+    on Elementos_Valencias (id_valencia);
+
