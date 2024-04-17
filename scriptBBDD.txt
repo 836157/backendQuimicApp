@@ -4,28 +4,89 @@
 CREATE DATABASE bbddProyecto;
 USE bbddProyecto;
 
-CREATE TABLE usuarios (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50),
-    apellido VARCHAR(50),
-    correoelectronico VARCHAR(100),
-    password VARCHAR(100)
+create table ElementosQuimicos
+(
+    id                 int auto_increment
+        primary key,
+    nombre             varchar(255) null,
+    numeroAtomico      int          null,
+    simbolo            varchar(5)   null,
+    pesoAtomico        float        null,
+    geometriaMasComun  varchar(255) null,
+    densidad           float        null,
+    puntoFusion        float        null,
+    puntoEbullicion    float        null,
+    calorEspecifico    float        null,
+    electronegatividad float        null,
+    radioAtomico       float        null,
+    radioCovalente     float        null,
+    radioIonico        float        null,
+    familia            varchar(255) null
 );
+
+create table preguntas
+(
+    id       int          not null
+        primary key,
+    pregunta varchar(255) not null,
+    tematica varchar(255) not null
+);
+
+create table respuestas
+(
+    id          int auto_increment
+        primary key,
+    respuesta   varchar(255) null,
+    es_correcta tinyint(1)   null,
+    id_pregunta int          null,
+    constraint respuestas_ibfk_1
+        foreign key (id_pregunta) references preguntas (id)
+);
+
+create index id_pregunta
+    on respuestas (id_pregunta);
+
+create table usuarios
+(
+    id       int auto_increment
+        primary key,
+    nombre   varchar(50)  null,
+    apellido varchar(50)  null,
+    correo   varchar(100) null,
+    password varchar(100) null
+);
+
+create table valencias
+(
+    id    int auto_increment
+        primary key,
+    valor int not null,
+    check ((`valor` >= -(4)) and (`valor` <= 7))
+);
+
+create table Elementos_Valencias
+(
+    id_elemento int null,
+    id_valencia int null,
+    id          int not null,
+    constraint Elementos_Valencias_ibfk_1
+        foreign key (id_elemento) references ElementosQuimicos (id),
+    constraint Elementos_Valencias_ibfk_2
+        foreign key (id_valencia) references valencias (id)
+);
+
+create index id_elemento
+    on Elementos_Valencias (id_elemento);
+
+create index id_valencia
+    on Elementos_Valencias (id_valencia);
 
 INSERT INTO usuarios (nombre, apellido, correoelectronico, password) VALUES
 ('John', 'Doe', 'john.doe@example.com', 'password123'),
 ('Jane', 'Smith', 'jane.smith@example.com', 'securePwd!'),
 ('Michael', 'Johnson', 'michael.johnson@example.com', 'm1k3p@ss');
 
-CREATE TABLE TablaElementosQuimicos (
-    id INT AUTO_INCREMENT,
-    nombre VARCHAR(255),
-    numeroAtomico INT,
-    simbolo VARCHAR(5),
-    pesoAtomico DECIMAL(10, 4),
-    geometriaMasComun VARCHAR(255),
-    PRIMARY KEY (id)
-);
+
 
 INSERT INTO TablaElementosQuimicos (nombre, numeroAtomico, simbolo, pesoAtomico, geometriaMasComun, densidad,
                                     puntoFusion, puntoEbullicion, calorEspecifico, electronegatividad, radioAtomico,
@@ -34,7 +95,7 @@ VALUES ('Hidrógeno', 1, 'H', 1.008, 'Hidrógeno molecular', 0.0899, 14.01, 20.2
        ('Helio', 2, 'He', 4.0026, 'Hexagonal compacta', 0.1786, 0.95, 4.22, 5.193, null, 31, 0.32, 0.32),
        ('Litio', 3, 'Li', 6.94, 'Cúbica centrada en las caras', 0.534, 453.69, 1615, 3.58, 0.98, 145, 1.23, 0.68),
        ('Berilio', 4, 'Be', 9.0122, 'Hexagonal compacta', 1.85, 1560, 2742, 1.824, 1.57, 105, 0.96, 0.35),
-       ('Boro', 5, 'B', 10.81, 'Rombodrico', 2.34, 2349, 4200, 1.026, 2.04, 85, 0.84, 0.23),
+       ('Boro', 5, 'B', 10.81, 'Romboédrico', 2.34, 2349, 4200, 1.026, 2.04, 85, 0.84, 0.23),
        ('Carbono', 6, 'C', 12.011, 'Cúbica centrada en las caras', 2.267, 3825, 5100, 0.709, 2.55, 70, 0.76, 0.17),
        ('Nitrógeno', 7, 'N', 14.007, 'Hexagonal compacta', 0.001251, 63.15, 77.36, 1.04, 3.04, 65, 0.71, 0.16),
        ('Oxígeno', 8, 'O', 15.999, 'Cúbica centrada en las caras', 0.001429, 54.36, 90.20, 0.918, 3.44, 60, 0.66, 0.14),
@@ -142,11 +203,7 @@ VALUES ('Hidrógeno', 1, 'H', 1.008, 'Hidrógeno molecular', 0.0899, 14.01, 20.2
 
 
 
-CREATE TABLE valencias
-(
-    id    INT AUTO_INCREMENT PRIMARY KEY,
-    valor INT NOT NULL CHECK (valor >= -4 AND valor <= 7)
-);
+
 
 INSERT INTO valencias (valor)
 VALUES (-4),
@@ -160,15 +217,6 @@ VALUES (-4),
        (5),
        (6),
        (7);
-
-CREATE TABLE Elementos_Valencias
-(
-    id_elemento INT,
-    id_valencia INT,
-    FOREIGN KEY (id_elemento) REFERENCES ElementosQuimicos (id),
-    FOREIGN KEY (id_valencia) REFERENCES valencias (id)
-);
-
 
 -- hidrogeno
 INSERT INTO Elementos_Valencias (id_elemento, id_valencia)
@@ -729,26 +777,26 @@ INSERT INTO preguntas (id,pregunta, tematica) VALUES (3,'¿Cuál es la fórmula 
 INSERT INTO preguntas (id,pregunta, tematica) VALUES (4,'¿Cuál es la fórmula del ácido sulfúrico?', 'Formulacion Inorganica');
 
 -- Respuestas para la pregunta 1
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('H2O', true, 1);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('HO2', false, 1);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('O2H', false, 1);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('OH2', false, 1);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('H₂O', true, 1);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('HO₂', false, 1);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('O₂H', false, 1);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('OH', false, 1);
 
 -- Respuestas para la pregunta 2
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('CO2', true, 2);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('CO', false, 2);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('O2C', false, 2);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('C2O', false, 2);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('CO', true, 2);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('C₂O', false, 2);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('CO₂', false, 2);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('2CO', false, 2);
 
 -- Respuestas para la pregunta 3
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('CH4', true, 3);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('H4C', false, 3);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('HC4', false, 3);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('C4H', false, 3);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('H₄c', true, 3);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('CH₄', false, 3);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('HC₄', false, 3);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('C₄H', false, 3);
 
 -- Respuestas para la pregunta 4
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('H2SO4', true, 4);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('SO4H2', false, 4);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('H2OS4', false, 4);
-INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('2HSO4', false, 4);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('H₂SO₄', true, 4);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('SO₄H₂', false, 4);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('H₂OS₄', false, 4);
+INSERT INTO respuestas (respuesta, es_correcta, id_pregunta) VALUES ('2HSO₄', false, 4);
 
