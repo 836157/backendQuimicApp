@@ -1,7 +1,6 @@
 package bbddmysql.springboot.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -25,7 +24,7 @@ public class Pregunta {
     @Column(name = "tematica")
     private String tematica;
 
-    @OneToMany(mappedBy = "pregunta")
+    @OneToMany(mappedBy = "pregunta" ,cascade = CascadeType.ALL)
     private List<Respuesta> respuestas;
 
 

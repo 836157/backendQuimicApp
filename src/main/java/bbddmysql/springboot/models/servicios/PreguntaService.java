@@ -21,5 +21,9 @@ public class PreguntaService {
         return preguntaRepository.findByTematica(tematica);
     }
 
+    public Pregunta guardarPregunta(Pregunta pregunta) {
+        return preguntaRepository.save(pregunta);
+    }
+
 
 }

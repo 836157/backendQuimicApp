@@ -26,7 +26,7 @@ create table ElementosQuimicos
 
 create table preguntas
 (
-    id       int          not null
+    id       int   auto_increment
         primary key,
     pregunta varchar(255) not null,
     tematica varchar(255) not null

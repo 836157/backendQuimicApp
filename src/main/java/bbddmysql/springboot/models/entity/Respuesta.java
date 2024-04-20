@@ -1,8 +1,6 @@
 package bbddmysql.springboot.models.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 
@@ -61,6 +59,14 @@ public class Respuesta {
 
     public void setPregunta(Pregunta pregunta) {
         this.pregunta = pregunta;
+    }
+
+    public void setPreguntaid(int id) {
+
+        if (this.pregunta == null) {
+            this.pregunta = new Pregunta();
+        }
+        this.pregunta.setId(id);
     }
 
     @Override
