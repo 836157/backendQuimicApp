@@ -14,10 +14,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    //lista todos los usuarios existentes. GET all
-    @GetMapping("/list")
-    public List<User> listarUsuarios(){
-        return userService.getUsers();
+    @GetMapping("/listarActivos")
+    //lista todos los usuarios existentes
+    public List<User> listarUsuariosActivos(){
+        return userService.getActiveUsers();
     }
 
     //Recupera un usuario por GET id

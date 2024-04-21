@@ -24,6 +24,17 @@ public class User {
     @Column(name = "password", nullable = true, length = 100)
     private String password;
 
+    @Column(name = "activo")
+    private Boolean activo;
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+
     public int getId() {
         return id;
     }

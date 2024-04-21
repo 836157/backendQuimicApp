@@ -16,6 +16,10 @@ public class UserService {
 
     public List<User> getUsers(){return repositoryUser.findAll();}
 
+    public List<User> getActiveUsers(){
+        return  repositoryUser.findByActivoTrue();
+    }
+
     public Optional<User> getUserById(int id){
         return repositoryUser.findById(id);
     }
