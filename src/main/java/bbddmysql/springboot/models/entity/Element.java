@@ -2,7 +2,6 @@ package bbddmysql.springboot.models.entity;
 
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
@@ -54,6 +53,62 @@ public class Element {
     @Basic
     @Column(name = "familia", nullable = false)
     private String familia;
+    @Basic
+    @Column(name = "color1", nullable = false)
+    private String color1;
+    @Basic
+    @Column(name = "color2", nullable = false)
+    private String color2;
+    @Basic
+    @Column(name = "source", nullable = false)
+    private String source;
+    @Basic
+    @Column(name = "posicionX", nullable = false)
+    private int posicionX;
+    @Basic
+    @Column(name = "posicionY", nullable = false)
+    private int posicionY;
+
+
+    public String getColor1() {
+        return color1;
+    }
+
+    public void setColor1(String color1) {
+        this.color1 = color1;
+    }
+
+    public String getColor2() {
+        return color2;
+    }
+
+    public void setColor2(String color2) {
+        this.color2 = color2;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public int getPosicionX() {
+        return posicionX;
+    }
+
+    public void setPosicionX(int posicionX) {
+        this.posicionX = posicionX;
+    }
+
+    public int getPosicionY() {
+        return posicionY;
+    }
+
+    public void setPosicionY(int posicionY) {
+        this.posicionY = posicionY;
+    }
 
     public String getFamilia() {
         return familia;
@@ -185,14 +240,7 @@ public class Element {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nombre, numeroAtomico, simbolo, pesoAtomico, geometriaMasComun, densidad, puntoFusion, puntoEbullicion, calorEspecifico, electronegatividad, radioAtomico, radioCovalente, radioIonico);
+        return Objects.hash(id, nombre, numeroAtomico, simbolo, pesoAtomico, geometriaMasComun, densidad, puntoFusion, puntoEbullicion, calorEspecifico, electronegatividad, radioAtomico, radioCovalente, radioIonico, familia, color1, color2, source, posicionX, posicionY);
     }
 
-   /* public Collection<EntidadElementosValencia> getListaValenciasElemento_id() {
-        return ListaValenciasElemento_id;
-    }
-
-    public void setListaValenciasElemento_id(Collection<EntidadElementosValencia> listaValenciasElemento_id) {
-        ListaValenciasElemento_id = listaValenciasElemento_id;
-    }*/
 }
