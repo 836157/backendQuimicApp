@@ -32,6 +32,50 @@ create table preguntas
     tematica varchar(255) not null
 );
 
+create table reacciones
+(
+    id       int   auto_increment
+        primary key,
+    reaccion varchar(255) not null,
+    A int null,
+    B int null,
+    C int null,
+    D int null,
+    E int null
+);
+
+//el diseño tiene en cuenta los factores estequiometricos que sean 1!!!! hay que ponerlos!
+
+INSERT INTO reacciones(reaccion, A,B,C,D,E) VALUES
+                                              ('A H₂ + B O₂ = C H₂O', 2, 1, 2,null,null),
+       ('A N₂ + B H₂ = C NH₃', 1, 3, 2,null,null),
+                                              ('A H₂O + B Na = C NaOH + D H₂', 2, 2, 2,1,null),
+                                              ('A KClO₃ = B KCl + C O₂', 2, 2, 3,null,null),
+                                              ('A BaO₂ + B HCl = C BaCl₂ + D H₂O₂', 1, 2, 1,1,null),
+                                              ('A H₂SO₄ + B NaCl = C Na₂SO₄ + D HCl', 1, 2, 1,2,null),
+                                              ('A FeS₂ = B Fe₃S₄ + C S₂', 3, 1, 1,null,null),
+                                              ('A H₂SO₄ + B C = C H₂O + D SO₂ + E CO₂', 2, 1, 2,2,1),
+                                              ('A SO₂ + B O₂ = C SO₃', 2, 1, 2,null,null),
+                                              ('A HCl + B MnO₂ = C MnCl₂ + D H₂O + E Cl₂', 4, 1, 1,2,1),
+                                              ('A K₂CO₃ + B C = C CO + D K', 1, 2,3,2,null),
+                                              ('A Ag₂SO₄ + B NaCl = C Na₂SO₄ + D AgCl', 1, 2, 1,2,null),
+                                              ('A NaNO₃ + B KCl = C NaCl + D KNO₃', 1,1, 1,1,null),
+                                              ('A Fe₂O₃ + B CO = C CO2 + D Fe', 1, 3, 3,2,null),
+                                              ('A Na₂CO₃ + B H₂O + C CO₂ = D NaHCO₃', 1, 1, 1,2,null),
+                                              ('A Cr₂O₃ + B Al = C Al₂O₃ + D Cr', 1, 2,1,2,null),
+                                              ('A Ag + B HNO₃ = C NO + D H2O + E AgNO₃', 3, 4, 1,2,3),
+                                              ('A CuFeS₂ + B O₂ = C SO₂ + D CuO + E FeO', 1, 3, 2,1,1),
+                                              ('A C₂H₆ + B O₂ = C CO₂ + D H₂O', 2, 7, 4,6,null),
+                                              ('A FeS₂ + B O₂ = C Fe2O₃ + D SO₂', 4, 11, 2,8,null),
+                                              ('A Zn + B HCl = C ZnCl₂ + D H₂',1,2, 1,1,null),
+                                              ('A Al + B HCl = C AlCl₃ + D H₂', 2, 6,2, 3,null),
+                                              ('A CaC₂ + B H₂O = C C₂H₂ + D Ca(OH)₂', 1, 2, 1,1,null),
+                                              ('A HCl + B Al(OH)₃ = C AlCl₃ + D H₂O', 3, 1, 1,3,null),
+                                              ('A Fe + B O₂ = C Fe₂O₃', 4, 3, 2,null,null),
+                                              ('A HBr + B NaOH = C NaBr + D H₂O', 1, 1, 1,1,null),
+                                              ('A C₆H₁₂O₆ + B O₂ = C CO₂ + D H₂O ', 1, 6, 6,6,null);
+
+
 create table respuestas
 (
     id          int auto_increment
