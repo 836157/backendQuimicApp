@@ -14,18 +14,29 @@ public class UserService {
     @Autowired
     private UserRepository repositoryUser;
 
-    public List<User> getUsers(){return repositoryUser.findAll();}
-
-    public List<User> getActiveUsers(){
-        return  repositoryUser.findByActivoTrue();
+    public List<User> getUsers() {
+        return repositoryUser.findAll();
     }
 
-    public Optional<User> getUserById(int id){
+    public List<User> getActiveUsers() {
+        return repositoryUser.findByActivoTrue();
+    }
+
+    public Optional<User> getUserById(int id) {
         return repositoryUser.findById(id);
     }
-    public User saveUser(User user){return repositoryUser.save(user);}
 
-    public String deleteUser(int id){
+    public boolean saveUser(User user) {
+        Optional<User> usuario = repositoryUser.findUserByCorreo(user.getCorreo());
+        if (usuario.isPresent()) {
+            return false;
+        } else {
+            repositoryUser.save(user);
+            return true;
+        }
+    }
+
+    public String deleteUser(int id) {
         Optional<User> user = repositoryUser.findById(id);
         if (user.isPresent()) {
             repositoryUser.deleteById(id);
@@ -35,10 +46,10 @@ public class UserService {
         }
     }
 
-    public User updateUser(User user){
+    public User updateUser(User user) {
         Optional<User> optionalUser = repositoryUser.findById(user.getId());
-        if(optionalUser.isPresent()){
-            User existeUser= optionalUser.get();
+        if (optionalUser.isPresent()) {
+            User existeUser = optionalUser.get();
             //Realizar la actualizacion del usuario
             existeUser.setNombre(user.getNombre());
             existeUser.setApellido(user.getApellido());
@@ -49,8 +60,8 @@ public class UserService {
         return null;
     }
 
-    public User login(String correo, String password){
-        return repositoryUser.findByCorreoAndPassword(correo,password);
+    public User login(String correo, String password) {
+        return repositoryUser.findByCorreoAndPassword(correo, password);
     }
 
 }
