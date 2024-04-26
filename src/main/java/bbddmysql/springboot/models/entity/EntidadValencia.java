@@ -2,10 +2,11 @@ package bbddmysql.springboot.models.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "valencias", schema = "bbddProyecto", catalog = "")
+@Table(name = "valencias", schema = "bbddProyecto")
 public class EntidadValencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -14,6 +15,10 @@ public class EntidadValencia {
     @Basic
     @Column(name = "valor", nullable = false)
     private int valor;
+
+    @ManyToMany(mappedBy = "valencias")
+    private List<Element> elementosQuimicos;
+
 
     public int getId() {
         return id;

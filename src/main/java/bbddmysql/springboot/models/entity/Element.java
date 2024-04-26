@@ -2,6 +2,7 @@ package bbddmysql.springboot.models.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -68,6 +69,18 @@ public class Element {
     @Basic
     @Column(name = "posicionY", nullable = false)
     private int posicionY;
+
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "Elementos_Valencias",
+            joinColumns = @JoinColumn(name = "id_elemento"),
+            inverseJoinColumns = @JoinColumn(name = "id_valencia"))
+    private List<EntidadValencia> valencias;
+
+    public List<EntidadValencia> getValencias() {
+        return valencias;
+    }
 
 
     public String getColor1() {

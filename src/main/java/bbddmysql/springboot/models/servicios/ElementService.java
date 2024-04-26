@@ -2,6 +2,7 @@ package bbddmysql.springboot.models.servicios;
 
 import bbddmysql.springboot.models.entity.Element;
 import bbddmysql.springboot.models.repository.ElementRepository;
+import org.antlr.v4.runtime.tree.pattern.ParseTreePattern;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,11 @@ public class ElementService {
     private ElementRepository repositoryElement;
 
     public List<Element> getElements(){
-        return repositoryElement.findAll();
+        List<Element> elements =repositoryElement.findAll();
+        for (Element element : elements) {
+            element.getValencias(); // Esto forzará la carga de las valencias
+        }
+        return elements;
     }
 
     public Optional<Element> getElementById(int id){

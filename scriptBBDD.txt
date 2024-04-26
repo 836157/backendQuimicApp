@@ -424,16 +424,18 @@ create table valencias
     check ((`valor` >= -(4)) and (`valor` <= 7))
 );
 
+
 create table Elementos_Valencias
 (
+    id  int auto_increment primary key,
     id_elemento int null,
     id_valencia int null,
-    id          int not null,
     constraint Elementos_Valencias_ibfk_1
         foreign key (id_elemento) references ElementosQuimicos (id),
     constraint Elementos_Valencias_ibfk_2
         foreign key (id_valencia) references valencias (id)
 );
+
 
 create index id_elemento
     on Elementos_Valencias (id_elemento);
