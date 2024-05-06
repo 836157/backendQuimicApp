@@ -76,9 +76,9 @@ public class Element {
             name = "Elementos_Valencias",
             joinColumns = @JoinColumn(name = "id_elemento"),
             inverseJoinColumns = @JoinColumn(name = "id_valencia"))
-    private List<EntidadValencia> valencias;
+    private List<Valencia> valencias;
 
-    public List<EntidadValencia> getValencias() {
+    public List<Valencia> getValencias() {
         return valencias;
     }
 

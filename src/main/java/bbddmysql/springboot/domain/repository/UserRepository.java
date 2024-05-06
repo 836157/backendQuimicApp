@@ -10,10 +10,6 @@ import java.util.Optional;
 @RepositoryRestResource(collectionResourceRel = "usuarios", path = "usuarios")
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByCorreoAndPassword(String correo, String password);
-
     Optional<User> findUserByCorreo(String correo);
-
-
-
     List<User> findByActivoTrue();
 }
