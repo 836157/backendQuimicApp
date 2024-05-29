@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recuperación de contraseña de QuimicApp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9;
+            color: #004d40;
+        }
+
+        .header {
+            background-color: #004d40;
+            color: #e8f5e9;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .content {
+            margin: 15px;
+        }
+
+        .reset-link {
+            display: block;
+            width: 200px;
+            height: 50px;
+            background: #4CAF50;
+            padding: 10px;
+            text-align: center;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            line-height: 50px;
+            margin: 20px auto auto;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Recuperación de contraseña de QuimicApp</h1>
+    <p>La mejor aplicación para aprender química segun los principios de la DUA</p>
+</div>
+<div class="content">
+    <h2 style="color: #00796b;">Hola usuario, pulse el siguiente boton para reestablecer la contraseña de la aplicacion</h2>
+    <p th:text="${emailBody}"></p>
+    <a class="reset-link" th:href="${resetLink}">Restablecer contraseña</a>
+</div>
+</body>
+<div class="footer" style="font-size: 0.8em; text-align: center; margin-top: 50px; color: #777;">
+    <p>Este es un correo electrónico generado automáticamente. Por favor, no respondas a este correo.</p>
+    <p>© 2024 QuimicApp. Todos los derechos reservados.</p>
+</div>
+</html>

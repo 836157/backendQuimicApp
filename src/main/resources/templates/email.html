@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Correo de QuimicApp</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e8f5e9;
+        }
+
+        .header {
+            background-color: #0b690b;
+            color: #e8f5e9;
+            padding: 10px;
+            text-align: center;
+        }
+        .header h1 img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .content {
+            margin: 15px;
+        }
+
+        #fondo {
+            background-color: rgb(90, 108, 90);
+            background-image: url('https://previews.123rf.com/images/peshkova/peshkova1806/peshkova180600557/103058409-fondo-qu%C3%ADmico-qu%C3%ADmico-brillante-concepto-de-qu%C3%ADmica-representaci%C3%B3n-3d.jpg'); /* Agrega tu imagen de fondo aquí */
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            color: #ffffff;
+            width: auto;
+            height: auto;
+        }
+
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1><img src="https://i.pinimg.com/originals/c6/63/40/c66340c318d02102f0a179bb845d1f4c.gif" alt="Icono"> Bienvenido a QuimicApp</h1> <!-- Agrega tu icono aquí -->
+    <p>La mejor aplicación para aprender química segun los principios de la DUA</p>
+</div>
+<div id="fondo" class="content">
+    <h2>El siguiente mensaje ha sido generado por un usuario que ha querido ponerse en contacto con
+        usted</h2>
+    <div style="background-color: cadetblue">
+        <p th:text="${emailBody}"></p>
+    </div>
+</div>
+<!-- Aquí puedes agregar tu pie de página -->
+<div class="footer" style="font-size: 0.8em; text-align: center; margin-top: 50px; color: #777;">
+    <p>Este es un correo electrónico generado automáticamente. Por favor, no respondas a este correo.</p>
+    <p>© 2024 QuimicApp. Todos los derechos reservados.</p>
+</div>
+</body>
+</html>
