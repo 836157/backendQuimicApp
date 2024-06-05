@@ -5,51 +5,102 @@
     <title>Recuperación de contraseña de QuimicApp</title>
     <style>
         body {
+            width: 80%;
             font-family: Arial, sans-serif;
-            background-color: #e8f5e9;
-            color: #004d40;
+            background-color: #ffffff;
+            margin: auto;
+            display: block;
+            padding-top: 20px;
         }
 
         .header {
-            background-color: #004d40;
-            color: #e8f5e9;
             padding: 10px;
             text-align: center;
-        }
-
-        .content {
-            margin: 15px;
         }
 
         .reset-link {
-            display: block;
-            width: 200px;
-            height: 50px;
-            background: #4CAF50;
-            padding: 10px;
+            display: inline-block;
+            width: auto;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
             text-align: center;
             border-radius: 5px;
-            color: white;
-            font-weight: bold;
-            line-height: 50px;
-            margin: 20px auto auto;
             text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15); /* Agrega sombra */
+            transition: all 0.3s ease; /* Agrega transición para el efecto de presionado */
         }
+
+        .reset-link:hover {
+            background-color: #7beed4; /* Cambia el color de fondo al pasar el mouse */
+        }
+
+        .reset-link:active {
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Reduce la sombra al hacer clic */
+            transform: translateY(6px); /* Mueve el botón un poco hacia abajo al hacer clic */
+        }
+
+        #fondo {
+            background-color: rgb(90, 108, 90);
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px;
+            color: #ffffff;
+            width: auto;
+            height: auto;
+        }
+
+        .footer {
+            font-size: 0.8em;
+            font-style: italic;
+            text-align: center;
+            margin-top: 25px;
+            color: white;
+        }
+
     </style>
 </head>
 <body>
-<div class="header">
-    <h1>Recuperación de contraseña de QuimicApp</h1>
-    <p>La mejor aplicación para aprender química segun los principios de la DUA</p>
-</div>
-<div class="content">
-    <h2 style="color: #00796b;">Hola usuario, pulse el siguiente boton para reestablecer la contraseña de la aplicacion</h2>
-    <p th:text="${emailBody}"></p>
-    <a class="reset-link" th:href="${resetLink}">Restablecer contraseña</a>
+<div style="background-color: #e8f5e9">
+    <div class="header"
+         style="background: url('https://img.freepik.com/vector-premium/ilustracion-esquema-atomo-brillante-tecnologia-abstracta_42077-12181.jpg') no-repeat center center; background-size: cover;">
+        <h1 style="color: white;">Recuperación de contraseña de QuimicApp</h1>
+        <p style="color: white;">La mejor aplicación para aprender química según los principios de la DUA</p>
+    </div>
+    <div id="fondo" class="content">
+        <h2 style="color: #ffffff;">Bienvenido usuario, pulse el siguiente botón para restablecer la contraseña de la
+            aplicación</h2>
+        <p th:text="${emailBody}"></p>
+        <a class="reset-link" th:href="${resetLink}">Restablecer contraseña</a>
+    </div>
+    <div class="footer"
+         style="background: url('https://img.freepik.com/vector-premium/ilustracion-esquema-atomo-brillante-tecnologia-abstracta_42077-12181.jpg') no-repeat center center; background-size: cover;">
+        <p style="padding-top: 15px">
+            ---
+            Este mensaje y cualquier archivo adjunto son confidenciales y están destinados exclusivamente para el uso
+            del destinatario al que se dirige.
+            Si usted ha recibido este mensaje por error, por favor notifíquelo inmediatamente al remitente y elimine
+            este correo electrónico de su sistema.
+            Está prohibida cualquier difusión, distribución o copia de este mensaje, así como cualquier acción tomada en
+            base a la información contenida en el mismo,
+            por personas distintas al destinatario designado.
+            De acuerdo con el Reglamento (UE) 2016/679 del Parlamento Europeo y del Consejo y la Ley Orgánica 3/2018 de
+            5 de diciembre,
+            de Protección de Datos Personales y garantía de los derechos digitales, le informamos que sus datos
+            personales serán tratados y
+            quedarán incorporados en los ficheros de [Nombre de la Empresa]. Puede ejercer sus derechos de acceso,
+            rectificación, supresión, limitación de tratamiento,
+            oposición y portabilidad dirigiéndose a [dirección de correo electrónico de la empresa] o a [dirección
+            física de la empresa]. Para más información,
+            consulte nuestra política de privacidad en [URL de la política de privacidad].
+            ---
+            Este es un correo electrónico generado automáticamente. Por favor, no respondas a este correo.
+        </p>
+        <p>© 2024 QuimicApp. Todos los derechos reservados.</p>
+    </div>
 </div>
 </body>
-<div class="footer" style="font-size: 0.8em; text-align: center; margin-top: 50px; color: #777;">
-    <p>Este es un correo electrónico generado automáticamente. Por favor, no respondas a este correo.</p>
-    <p>© 2024 QuimicApp. Todos los derechos reservados.</p>
-</div>
 </html>
