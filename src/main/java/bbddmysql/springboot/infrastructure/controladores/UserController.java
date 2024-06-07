@@ -44,14 +44,9 @@ public class UserController {
     //modificar
     @PutMapping("/mod")
     public ResponseEntity<?> actualizarUsuario(@RequestBody User usuarioMod) {
-        Optional<User> usuario = userService.getUserById(usuarioMod.getId());
-        if (usuario.isPresent()) {
-            usuario.get().setNombre(usuarioMod.getNombre());
-            usuario.get().setApellido(usuarioMod.getApellido());
-            usuario.get().setCorreo(usuarioMod.getCorreo());
-            usuario.get().setPassword(usuarioMod.getPassword());
-            userService.saveUser(usuario.get());
-            return ResponseEntity.ok().body("");
+        User updatedUser = userService.updateUser(usuarioMod);
+        if (updatedUser != null) {
+            return ResponseEntity.ok().body("Usuario actualizado correctaMENTE");
         } else {
             return ResponseEntity.notFound().build();
         }

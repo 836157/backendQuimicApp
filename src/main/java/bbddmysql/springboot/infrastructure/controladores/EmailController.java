@@ -44,11 +44,16 @@ public class EmailController {
         return new ResponseEntity<>("No existe usuario asociado al correo introducido", HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/newPasswordForm")
+   @GetMapping("/newPasswordForm")
     public ResponseEntity<Resource> serveNewPasswordForm() {
         Resource resource = resourceLoader.getResource("classpath:templates/newPasswordForm.html");
         return ResponseEntity.ok(resource);
     }
+
+   /* @GetMapping("/newPasswordForm")
+    public String serveNewPasswordForm() {
+        return "redirect:https://solecas864.ieszaidinvergeles.es/newPasswordForm.html";
+    }*/
 
     @PostMapping("/newPassword")
     public ResponseEntity<String> resetPassword(@RequestParam String correo, @RequestParam String newPassword) {

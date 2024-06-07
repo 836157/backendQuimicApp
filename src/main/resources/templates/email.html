@@ -19,7 +19,7 @@
         }
 
         .footer {
-            font-size: 0.8em;
+            font-size: 0.4em;
             font-style: italic;
             text-align: center;
             margin-top: 50px;
@@ -27,13 +27,13 @@
         }
 
         #fondo {
-            background-color: rgb(90, 108, 90);
+            background-color: rgb(255, 255, 255);
             background-size: cover;
             background-repeat: no-repeat;
             padding: 20px;
             border-radius: 10px;
             margin: 20px;
-            color: #ffffff;
+            color: #030303;
             width: auto;
             height: auto;
         }
@@ -48,9 +48,8 @@
         <p style="color: white;">La mejor aplicación para aprender química segun los principios de la DUA</p>
     </div>
     <div id="fondo" class="content">
-        <h2>El siguiente mensaje ha sido generado por un usuario que ha querido ponerse en contacto con
-            usted</h2>
-        <div style="background-color: #a1dc77">
+        <h2>Tienes un mensaje nuevo: </h2>
+        <div>
             <p th:text="${emailBody}"></p>
         </div>
     </div>
