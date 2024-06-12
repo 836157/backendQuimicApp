@@ -1,6 +1,7 @@
 package bbddmysql.springboot.infrastructure.controladores;
 
 import bbddmysql.springboot.domain.entity.User;
+import bbddmysql.springboot.infrastructure.servicios.AESCipherService;
 import bbddmysql.springboot.infrastructure.servicios.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,17 +20,19 @@ public class AuthController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private AESCipherService aesCipherService;
+
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody Map<String,String> credentials){
-        String correo= credentials.get("correo");
-        String pasword=credentials.get("password");
-        User user=userService.login(correo,pasword);
-        if(user != null){
+        String correo = credentials.get("correo");
+        String password = credentials.get("password");
+        User user = userService.getUserByEmail(correo);
+        if (user != null && password.equals(aesCipherService.decrypt(user.getPassword()))) {
             return new ResponseEntity<>(user, HttpStatus.OK);
-        }else{
+        } else {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
     }
-
 
 }

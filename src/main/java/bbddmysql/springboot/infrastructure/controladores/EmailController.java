@@ -3,6 +3,7 @@ package bbddmysql.springboot.infrastructure.controladores;
 import bbddmysql.springboot.domain.entity.EmailDTO;
 import bbddmysql.springboot.domain.entity.User;
 import bbddmysql.springboot.domain.repository.UserRepository;
+import bbddmysql.springboot.infrastructure.servicios.AESCipherService;
 import bbddmysql.springboot.infrastructure.servicios.IEmailService;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,9 @@ public class EmailController {
         return "redirect:https://solecas864.ieszaidinvergeles.es/newPasswordForm.html";
     }*/
 
+    @Autowired
+    AESCipherService aesCipherService;
+
     @PostMapping("/newPassword")
     public ResponseEntity<String> resetPassword(@RequestParam String correo, @RequestParam String newPassword) {
         Optional<User> usuario = userRepository.findUserByCorreo(correo);
@@ -62,7 +66,8 @@ public class EmailController {
             return new ResponseEntity<>("No existe usuario asociado al correo introducido", HttpStatus.NOT_FOUND);
         }
         User user = usuario.get();
-        user.setPassword(newPassword); // Asegúrate de codificar la contraseña antes de guardarla
+        String encryptedPassword = aesCipherService.encrypt(newPassword); // Cifrar la contraseña
+        user.setPassword(encryptedPassword);
         userRepository.save(user);
 
         return new ResponseEntity<>("Contraseña actualizada correctamente", HttpStatus.OK);

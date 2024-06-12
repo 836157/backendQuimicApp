@@ -64,4 +64,7 @@ public class UserService {
         return repositoryUser.findByCorreoAndPassword(correo, password);
     }
 
+    public User getUserByEmail(String correo) {
+        return repositoryUser.findUserByCorreo(correo).orElse(null);
+    }
 }

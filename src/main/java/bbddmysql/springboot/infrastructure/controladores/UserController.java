@@ -1,6 +1,7 @@
 package bbddmysql.springboot.infrastructure.controladores;
 
 import bbddmysql.springboot.domain.entity.User;
+import bbddmysql.springboot.infrastructure.servicios.AESCipherService;
 import bbddmysql.springboot.infrastructure.servicios.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,9 @@ import java.util.Optional;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AESCipherService aesCipherService;
 
     @GetMapping("/listarActivos")
     //lista todos los usuarios existentes
@@ -32,6 +36,7 @@ public class UserController {
     //insertar usuarios POSTz
     @PostMapping("/save")
     public Boolean guardarUsuario(@Validated @RequestBody User usuario) {
+        usuario.setPassword(aesCipherService.encrypt(usuario.getPassword()));
         return userService.saveUser(usuario);
     }
 
@@ -44,6 +49,7 @@ public class UserController {
     //modificar
     @PutMapping("/mod")
     public ResponseEntity<?> actualizarUsuario(@RequestBody User usuarioMod) {
+        usuarioMod.setPassword(aesCipherService.encrypt(usuarioMod.getPassword()));
         User updatedUser = userService.updateUser(usuarioMod);
         if (updatedUser != null) {
             return ResponseEntity.ok().body("Usuario actualizado correctaMENTE");
